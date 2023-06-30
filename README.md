@@ -1,3 +1,3 @@
-# LWJGL_Template
-A personal template for starting LWJGL project.
-All basic OpenGL calls for creating a window have been set up already. 
+# Evolution Simulation
+An evolution simulation implemented in the LWJGL
+Uses a simple forward feed nueral network with a simple back propagation implementation.

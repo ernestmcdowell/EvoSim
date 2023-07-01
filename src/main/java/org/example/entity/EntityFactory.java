@@ -23,6 +23,12 @@ public class EntityFactory {
                 .collect(Collectors.toList());
     }
 
+    public List<Plant> createPlants(int count) {
+        return IntStream.range(0, count)
+                .mapToObj(i -> new Plant(createRandomChromosome(), rand.nextFloat(), rand.nextFloat(), 1, .1f))
+                .collect(Collectors.toList());
+    }
+
     private Chromosome createRandomChromosome() {
         // Generate random values for each gene within their desired range
         double hungerGene = rand.nextDouble();

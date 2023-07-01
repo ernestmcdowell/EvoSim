@@ -13,13 +13,12 @@ public class Carnivore extends Entity {
     List<Herbivore> allHerbivores;
 
     public Carnivore(Chromosome chromosome, float x, float y, float size) {
-        super(chromosome, 0);
+        super(chromosome, 0, x , y);
         this.x = x;
         this.y = y;
         this.size = size;
         this.nn = new NN();
         this.nn.Awake();
-        nn.initializeWithWeightsAndBiases(chromosome.getWeightsForNN(), chromosome.getBiasesForNN());
     }
 
     public void updateState(float[] worldState) {

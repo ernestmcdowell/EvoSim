@@ -3,19 +3,35 @@ package org.example.entity;
 import org.example.NN.Chromosome;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.IntFunction;
+import java.util.stream.Collectors;
 
 public class EntityManager {
     private final List<Entity> entities = new ArrayList<>();
     private static EntityManager instance;
     private int nextID = 0;
+    private List<Herbivore> herbivores;
+
+    private EntityManager(){
+        herbivores = new ArrayList<>();
+    }
 
     public static EntityManager getInstance() {
         if (instance == null) {
             instance = new EntityManager();
         }
         return instance;
+    }
+
+    public List<Herbivore> getHerbivores() {
+        return herbivores;
+    }
+
+    // Method to add herbivores to the list
+    public void addHerbivore(Herbivore herbivore) {
+        herbivores.add(herbivore);
     }
 
     public interface EntitySupplier<T extends Entity> {
@@ -38,6 +54,9 @@ public class EntityManager {
     public void spawnHerbivores(int count) {
         spawnEntities(new EntityFactory()::createHerbivores, count);
     }
+    public void spawnPlants(int count) {
+        spawnEntities(new EntityFactory()::createPlants, count);
+    }
 
     public void replacePopulation(List<Chromosome> newPopulation) {
         // Create new entities with the new chromosomes
@@ -47,6 +66,7 @@ public class EntityManager {
         for (int i = 0; i < entityCount; i++) {
             Chromosome chromosome = newPopulation.get(i);
             Entity newEntity = createRandomEntityWithChromosome(chromosome, entityFactory);
+            spawnPlants(60);
             newEntities.add(newEntity);
         }
 

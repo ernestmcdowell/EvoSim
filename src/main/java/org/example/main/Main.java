@@ -74,6 +74,7 @@ public class Main {
         // Spawn entities here
         entityManager.spawnCarnivores(10); // spawn 10 carnivores
         entityManager.spawnHerbivores(20);
+        entityManager.spawnPlants(60);
     }
 
 
@@ -109,7 +110,7 @@ public class Main {
             if (ImGui.begin("Test Window")) {
                 UIComponents.createButton("Train Simulation", () -> isSimulationTraining = true);
                 UIComponents.createButton("Stop Training", () -> isSimulationTraining = false);
-                UIComponents.createButton("Run Simulation", () -> isSimulationRunning = false);
+                UIComponents.createButton("Run Simulation", () -> isSimulationRunning = true);
                 UIComponents.createButton("Stop Running", () -> isSimulationRunning = false);
                 ImGui.end();
             }
@@ -194,6 +195,13 @@ public class Main {
                     entityManager.replacePopulation(newPopulation);
                 }
             }
+
+            if (isSimulationRunning) {
+                for (Herbivore herbivore : entityManager.getHerbivores()) {
+                    herbivore.Update();
+                }
+            }
+
             ImGui.render();
             imGuiGl3.renderDrawData(ImGui.getDrawData());
 

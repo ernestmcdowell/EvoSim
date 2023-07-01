@@ -2,10 +2,7 @@ package org.example.rendering;
 import imgui.ImGui;
 import imgui.flag.ImGuiHoveredFlags;
 import org.example.camera.Camera;
-import org.example.entity.Carnivore;
-import org.example.entity.Entity;
-import org.example.entity.EntityManager;
-import org.example.entity.Herbivore;
+import org.example.entity.*;
 import org.example.window.WindowManager;
 import org.lwjgl.opengl.GL;
 import java.nio.ByteBuffer;
@@ -70,6 +67,8 @@ public class Renderer {
                 renderCarnivore((Carnivore) entity, camera.getX(), camera.getY());
             } else if (entity instanceof Herbivore) {
                 renderHerbivore((Herbivore) entity, camera.getX(), camera.getY());
+            } else if (entity instanceof Plant){
+                renderPlant((Plant) entity, camera.getX(), camera.getY());
             }
         }
 
@@ -89,6 +88,21 @@ public class Renderer {
         float x = herbivore.getX() - cameraX;
         float y = herbivore.getY() - cameraY;
         float size = herbivore.getSize();
+
+        glColor3f(0.0f, 0.0f, 1.0f);
+
+        glBegin(GL_QUADS);
+        glVertex2f(x, y);
+        glVertex2f(x + size, y);
+        glVertex2f(x + size, y + size);
+        glVertex2f(x, y + size);
+        glEnd();
+    }
+
+    private void renderPlant(Plant plant, float cameraX, float cameraY) {
+        float x = plant.getX() - cameraX;
+        float y = plant.getY() - cameraY;
+        float size = plant.getSize();
 
         glColor3f(0.0f, 1.0f, 0.0f);
 

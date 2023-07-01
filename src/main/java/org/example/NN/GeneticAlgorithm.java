@@ -14,6 +14,8 @@ public class GeneticAlgorithm {
         random = new Random();
     }
 
+
+
     public List<Chromosome> evolvePopulation(List<Chromosome> population) {
         List<Chromosome> newPopulation = new ArrayList<>();
 

@@ -30,8 +30,6 @@ public class WindowManager {
     private double lastMouseY = 0;
     private final Camera camera;
     private final float scrollSensitivity = 0.1f;
-    private final float mouseSensitivity = 0.1f;
-    private final float zoomSpeed = 0.1f;
     private double mouseX, mouseY;
     private int viewportWidth;
     private int viewportHeight;
@@ -85,27 +83,18 @@ public class WindowManager {
             }
         });
 
-        glfwSetCursorPosCallback(window, (window, xpos, ypos) -> {
-            if (mouseDragging) {
-                double deltaX = (xpos - lastMouseX) * mouseSensitivity;
-                double deltaY = (ypos - lastMouseY) * mouseSensitivity * -1;
-                camera.move((float) deltaX, (float) deltaY);
-            }
-            lastMouseX = xpos;
-            lastMouseY = ypos;
-        });
-
         glfwSetMouseButtonCallback(window, (window, button, action, mods) -> {
             if (button == GLFW_MOUSE_BUTTON_LEFT) {
                 if (action == GLFW_PRESS) {
                     mouseDragging = true;
                     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-                } else if (action == GLFW_RELEASE) {
+                } else {
                     mouseDragging = false;
                     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
                 }
             }
         });
+
 
         glfwSetScrollCallback(window, (window, xOffset, yOffset) -> {
             // Adjust the zoom based on the scroll offset
@@ -172,9 +161,6 @@ public class WindowManager {
 
     public void swapBuffers(){
         glfwSwapBuffers(window);
-    }
-
-    public void setRenderer(Renderer renderer) {
     }
 
     public int getViewportWidth() {

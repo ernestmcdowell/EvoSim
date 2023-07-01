@@ -14,7 +14,7 @@ public class Camera {
         this.y = y;
     }
 
-    public void move(float dx, float dy) {
+    public void move(double dx, double dy) {
         this.x += dx;
         this.y += dy;
     }
@@ -62,4 +62,10 @@ public class Camera {
     public int getViewportHeight() {
         return viewportHeight;
     }
+
+    public void setCameraPosition(float x, float y) {
+        this.x = x;
+        this.y = y;
+    }
+
 }

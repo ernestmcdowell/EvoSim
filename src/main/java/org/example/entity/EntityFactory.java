@@ -13,13 +13,13 @@ public class EntityFactory {
 
     public List<Carnivore> createCarnivores(int count) {
         return IntStream.range(0, count)
-                .mapToObj(i -> new Carnivore(createRandomChromosome(), rand.nextFloat(), rand.nextFloat(), .01f))
+                .mapToObj(i -> new Carnivore(createRandomChromosome(), rand.nextFloat(), rand.nextFloat(), .1f))
                 .collect(Collectors.toList());
     }
 
     public List<Herbivore> createHerbivores(int count) {
         return IntStream.range(0, count)
-                .mapToObj(i -> new Herbivore(createRandomChromosome(), rand.nextFloat(), rand.nextFloat(), .01f))
+                .mapToObj(i -> new Herbivore(createRandomChromosome(), rand.nextFloat(), rand.nextFloat(), .1f))
                 .collect(Collectors.toList());
     }
 

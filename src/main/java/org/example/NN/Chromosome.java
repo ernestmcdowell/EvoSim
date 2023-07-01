@@ -129,4 +129,27 @@ public class Chromosome {
         return normalizedReproductionChance;
     }
 
+    public float[][] getWeightsForNN() {
+        // Assuming each gene corresponds to a weight in the neural network
+        return new float[][] {
+                { (float) hungerGene, (float) healthGene, (float) reproductionChanceGene },
+                { (float) speedGene, (float) visionGene, (float) sizeGene },
+                { (float) staminaGene, (float) aggressionGene, (float) passivenessGene }
+        };
+    }
+
+    public float[] getBiasesForNN() {
+        // Assuming each gene also contributes to a bias in the neural network
+        return new float[] {
+                (float) hungerGene,
+                (float) healthGene,
+                (float) reproductionChanceGene,
+                (float) speedGene,
+                (float) visionGene,
+                (float) sizeGene,
+                (float) staminaGene,
+                (float) aggressionGene,
+                (float) passivenessGene
+        };
+    }
 }

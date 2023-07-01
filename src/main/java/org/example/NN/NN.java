@@ -120,6 +120,31 @@ public class NN {
 
     }
 
+    public void initializeWithWeightsAndBiases(float[][] weights, float[] biases) {
+        for (int i = 0; i < layers.length; i++) {
+            // Adjust the size of weightsArray to match the size of the incoming weights array
+            layers[i].weightsArray = new float[weights.length][];
+            for (int j = 0; j < weights.length; j++) {
+                layers[i].weightsArray[j] = new float[weights[j].length];
+                System.arraycopy(weights[j], 0, layers[i].weightsArray[j], 0, weights[j].length);
+            }
+            // Adjust the size of biasesArray to match the size of the incoming biases array
+            layers[i].biasesArray = new float[biases.length];
+            System.arraycopy(biases, 0, layers[i].biasesArray, 0, biases.length);
+        }
+    }
+
+
+
+    public void mutate(float mutationChance, float mutationAmount) {
+        for (Layer layer : layers) {
+            layer.MutateLayer(mutationChance, mutationAmount);
+        }
+    }
+
+
+
+
 }
 
 
